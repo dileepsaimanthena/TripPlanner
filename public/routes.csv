@@ -1,0 +1,21 @@
+origin,destination,cost,time,transportType
+Boston,New York,150,230,Train
+Boston,Providence,50,90,Bus
+New York,Philadelphia,100,150,Train
+Philadelphia,Washington,80,120,Bus
+Washington,New York,120,180,Plane
+Chicago,New York,300,420,Plane
+Chicago,Boston,350,480,Plane
+San Francisco,Los Angeles,200,60,Train
+Los Angeles,Houston,400,240,Plane
+Houston,Miami,350,300,Plane
+Miami,Atlanta,150,180,Bus
+Atlanta,Dallas,250,210,Train
+Denver,Dallas,220,180,Train
+Seattle,San Francisco,280,300,Bus
+Las Vegas,Los Angeles,100,150,Bus
+Seattle,Las Vegas,250,330,Plane
+Boston,Chicago,400,480,Plane
+New York,Chicago,350,450,Plane
+San Francisco,Denver,320,360,Plane
+Denver,Seattle,300,400,Bus
