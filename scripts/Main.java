@@ -9,8 +9,8 @@ public class Main {
         Graph graph = new GraphImpl();
         CSVLoader loader = new CSVLoader();
         try {
-            loader.loadCities(graph, "data/cities.csv");
-            loader.loadRoutes(graph, "data/routes.csv");
+            loader.loadCities(graph, "../public/cities.csv");
+            loader.loadRoutes(graph, "../public/routes.csv");
         } catch (IOException e) {
             System.out.println("Error loading data: " + e.getMessage());
             return;
