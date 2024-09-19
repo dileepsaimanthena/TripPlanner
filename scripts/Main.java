@@ -11,6 +11,7 @@ public class Main {
         try {
             loader.loadCities(graph, "../public/cities.csv");
             loader.loadRoutes(graph, "../public/routes.csv");
+
         } catch (IOException e) {
             System.out.println("Error loading data: " + e.getMessage());
             return;
