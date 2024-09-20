@@ -15,16 +15,16 @@ public class TripPlannerController {
         if (priority.equals("fast")) {
             Dijkstra dijkstra = new DijkstraImpl();
             Map<City, Double> fastestPath = dijkstra.findShortestPath(graph, start, destination, Comparator.comparingDouble(Route::getTime));
-            return fastestPath.toString();
+            return "Fastest Route: " + fastestPath.toString();
         } else if (priority.equals("cheap")) {
             Dijkstra dijkstra = new DijkstraImpl();
             Map<City, Double> cheapestPath = dijkstra.findShortestPath(graph, start, destination, Comparator.comparingDouble(Route::getCost));
-            return cheapestPath.toString();
+            return "Cheapest Route: " + cheapestPath.toString();
         } else {
             BFS bfs = new BFSImpl();
             List<City> directRoute = bfs.findDirectRoute(graph, start, destination);
-            return directRoute.toString();
+            return "Direct Route: " + directRoute.toString();
         }
-    }
+    }    
 }
 
