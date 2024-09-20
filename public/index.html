@@ -3,9 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Trip Planner</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>The page is getting ready</h1>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <h1>Trip Planner</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <main>
+        <section class="trip-planner-form">
+            <h2>Plan Your Trip</h2>
+            <form action="/submit" method="POST">
+                <label for="src">Select Source:</label>
+                <select name="src" id="src">
+                    <!-- Populate options from Excel (to be filled dynamically) -->
+                </select>
+
+                <label for="dst">Select Destination:</label>
+                <select name="dst" id="dst">
+                    <!-- Populate options from Excel (to be filled dynamically) -->
+                </select>
+
+                <label for="type">Select Route Type:</label>
+                <select name="type" id="type">
+                    <option value="fast">Fastest Route</option>
+                    <option value="cheap">Cheapest Route</option>
+                    <option value="direct">Direct Route</option>
+                </select>
+
+                <button type="submit">Find Route</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Trip Planner. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Example script to dynamically populate dropdowns from the backend
+        fetch('/cities')
+            .then(response => response.json())
+            .then(cities => {
+                const srcSelect = document.getElementById('src');
+                const dstSelect = document.getElementById('dst');
+                
+                cities.forEach(city => {
+                    const srcOption = document.createElement('option');
+                    const dstOption = document.createElement('option');
+                    srcOption.value = city.name;
+                    srcOption.text = city.name;
+                    dstOption.value = city.name;
+                    dstOption.text = city.name;
+
+                    srcSelect.appendChild(srcOption);
+                    dstSelect.appendChild(dstOption);
+                });
+            });
+    </script>
 </body>
 </html>
