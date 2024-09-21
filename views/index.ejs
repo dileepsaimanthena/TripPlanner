@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trip Planner</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
 </head>
 <body>
@@ -14,7 +14,7 @@
             <h1>Trip Planner</h1>
             <nav>
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="#">Documentation</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
@@ -26,15 +26,19 @@
     <main>
         <section class="trip-planner-form">
             <h2>Plan Your Trip</h2>
-            <form action="/submit" method="POST">
+            <form action="/" method="POST">
                 <label for="src">Select Source:</label>
                 <select name="src" id="src">
-                    <!-- Populate options from Excel (to be filled dynamically) -->
+                    <% cities.forEach(function(city) { %>
+                        <option value="<%= city.name %>"><%= city.name %></option>
+                    <% }); %>
                 </select>
 
                 <label for="dst">Select Destination:</label>
                 <select name="dst" id="dst">
-                    <!-- Populate options from Excel (to be filled dynamically) -->
+                    <% cities.forEach(function(city) { %>
+                        <option value="<%= city.name %>"><%= city.name %></option>
+                    <% }); %>
                 </select>
 
                 <label for="type">Select Route Type:</label>
@@ -46,6 +50,13 @@
 
                 <button type="submit">Find Route</button>
             </form>
+
+            <% if (path) { %>
+                <div class="route-result">
+                    <h3>Calculated Route:</h3>
+                    <p><%= path %></p>
+                </div>
+            <% } %>
         </section>
     </main>
 
@@ -53,27 +64,5 @@
     <footer>
         <p>&copy; 2024 Trip Planner. All rights reserved.</p>
     </footer>
-
-    <script>
-        // Example script to dynamically populate dropdowns from the backend
-        fetch('/cities')
-            .then(response => response.json())
-            .then(cities => {
-                const srcSelect = document.getElementById('src');
-                const dstSelect = document.getElementById('dst');
-                
-                cities.forEach(city => {
-                    const srcOption = document.createElement('option');
-                    const dstOption = document.createElement('option');
-                    srcOption.value = city.name;
-                    srcOption.text = city.name;
-                    dstOption.value = city.name;
-                    dstOption.text = city.name;
-
-                    srcSelect.appendChild(srcOption);
-                    dstSelect.appendChild(dstOption);
-                });
-            });
-    </script>
 </body>
 </html>
