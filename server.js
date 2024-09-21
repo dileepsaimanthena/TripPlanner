@@ -42,25 +42,25 @@ app.get('/', async (req, res) => {
 });
 
 app.post('/', async (req, res) => {
-    const { src, dst, type } = req.body;
+    const { src, dst, type } = req.body;  // Retrieve form values
 
     try {
-        // Get the absolute path to the TripPlanner directory (project root)
-        const projectRoot = path.join(__dirname);  // This is the root directory of the project
+        // Get the absolute path to the project root (TripPlanner directory)
+        const projectRoot = path.join(__dirname);
         
-        // Java command with the classpath set to the project root, and the fully qualified class name
-        const command = `java -cp ${projectRoot} scripts.Main ${src} ${dst} ${type}`;
+        // Java command to run the Main class with command-line arguments
+        const command = `java -cp ${projectRoot} scripts.Main "${src}" "${dst}" ${type}`;
         
         console.log(`Executing command: ${command}`);
 
-        // Execute the Java program with child_process.exec
+        // Execute the Java program
         exec(command, (error, stdout, stderr) => {
             if (error) {
                 console.error(`Error executing Java program: ${stderr}`);
                 res.status(500).send(`Error calculating the route: ${stderr}`);
             } else {
                 console.log(`Java stdout: ${stdout}`);
-                const cities = loadCities();  // Reload cities
+                const cities = loadCities();  // Reload cities from the CSV
                 res.render('index', { cities, path: stdout });  // Send the result to the template
             }
         });
