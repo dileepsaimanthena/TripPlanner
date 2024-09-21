@@ -34,10 +34,12 @@ function loadCities() {
     });
 }
 
+// Initial GET request to render the form
 app.get('/', async (req, res) => {
     try {
+        // Load cities for the form
         const cities = await loadCities();
-        res.render('index', { cities, path: null });
+        res.render('index', { cities, path: null });  // Initially, `path` is null
     } catch (error) {
         console.error('Error loading cities:', error);
         res.status(500).send('Error loading cities');
@@ -45,14 +47,14 @@ app.get('/', async (req, res) => {
 });
 
 app.post('/', async (req, res) => {
-    const { src, dst, type } = req.body;  // Retrieve form values
+    const { src, dst, type } = req.body;
 
     try {
-        // Get the absolute path to the project root (TripPlanner directory)
-        const projectRoot = path.join(__dirname);
+        // Get the cities array by loading from the CSV
+        const cities = await loadCities();
         
         // Java command to run the Main class with command-line arguments
-        const command = `java -cp ${projectRoot} scripts.Main "${src}" "${dst}" ${type}`;
+        const command = `java -cp ${path.join(__dirname)} scripts.Main "${src}" "${dst}" ${type}`;
         
         console.log(`Executing command: ${command}`);
 
@@ -63,8 +65,9 @@ app.post('/', async (req, res) => {
                 res.status(500).send(`Error calculating the route: ${stderr}`);
             } else {
                 console.log(`Java stdout: ${stdout}`);
-                const cities = loadCities();  // Reload cities from the CSV
-                res.render('index', { cities, path: stdout });  // Send the result to the template
+                
+                // Render the page with the result and cities array
+                res.render('index', { cities, path: stdout });  // Make sure `cities` is passed as an array
             }
         });
     } catch (error) {
