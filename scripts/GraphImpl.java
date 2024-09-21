@@ -5,7 +5,6 @@ public class GraphImpl implements Graph {
     @Override
     public void addCity(City city) {
         adjList.putIfAbsent(city, new ArrayList<>());
-        System.out.println("Added city to graph: " + city.getName());  // Debug statement
     }
     @Override
     public void addRoute(Route route) {
@@ -20,7 +19,6 @@ public class GraphImpl implements Graph {
         // Add route in both directions (bidirectional graph)
         adjList.get(route.getSource()).add(route);
         adjList.get(route.getDestination()).add(new Route(route.getDestination(), route.getSource(), route.getCost(), route.getTime(), route.getTransportType()));
-        System.out.println("Added route: " + route.getSource().getName() + " -> " + route.getDestination().getName() + " (Cost: " + route.getCost() + ", Time: " + route.getTime() + ")");  // Debug statement
     }
     @Override
     public List<Route> getRoutesFromCity(City city) {

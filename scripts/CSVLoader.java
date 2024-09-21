@@ -14,7 +14,6 @@ public class CSVLoader {
             String[] fields = line.split(",");
             City city = getOrCreateCity(fields[0]);
             graph.addCity(city);
-            System.out.println("City loaded: " + city.getName());
         }
         reader.close();
     }
@@ -33,8 +32,6 @@ public class CSVLoader {
             
             Route route = new Route(source, destination, cost, time, transportType);
             graph.addRoute(route);
-            System.out.println("Route loaded: " + source.getName() + " -> " + destination.getName() + 
-                               " (Cost: " + cost + ", Time: " + time + ")");
         }
         reader.close();
     }

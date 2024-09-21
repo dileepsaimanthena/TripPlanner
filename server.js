@@ -34,10 +34,8 @@ function loadCities() {
     });
 }
 
-// Initial GET request to render the form
 app.get('/', async (req, res) => {
     try {
-        // Load cities for the form
         const cities = await loadCities();
         res.render('index', { cities, path: null });  // Initially, `path` is null
     } catch (error) {

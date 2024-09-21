@@ -11,9 +11,6 @@ public class DijkstraImpl implements Dijkstra {
         // Initialize distances and queue
         distances.put(start, 0.0);
         queue.add(start);
-    
-        System.out.println("Starting Dijkstra from: " + start.getName() + " to " + destination.getName());
-    
         while (!queue.isEmpty()) {
             City current = queue.poll();
     
@@ -22,14 +19,11 @@ public class DijkstraImpl implements Dijkstra {
                 continue;
             }
     
-            System.out.println("Processing city: " + current.getName());
-    
             // Mark the city as visited
             visited.add(current);
     
             // If we reached the destination, stop
             if (current.equals(destination)) {
-                System.out.println("Reached destination: " + destination.getName());
                 break;
             }
     
@@ -45,14 +39,11 @@ public class DijkstraImpl implements Dijkstra {
                 // Calculate the new distance based on the comparator (either time or cost)
                 double newDist = distances.get(current) + (comparator.compare(route, route) == 0 ? route.getTime() : route.getCost());
     
-                System.out.println("Evaluating route: " + current.getName() + " -> " + nextCity.getName() + " (Cost: " + route.getCost() + ", Time: " + route.getTime() + ")");
-    
                 // If a shorter path is found to nextCity, update the distances and previous cities
                 if (newDist < distances.getOrDefault(nextCity, Double.POSITIVE_INFINITY)) {
                     distances.put(nextCity, newDist);
                     prev.put(nextCity, current);
                     queue.add(nextCity);
-                    System.out.println("Updated distance for " + nextCity.getName() + ": " + newDist);
                 }
             }
         }
@@ -83,10 +74,6 @@ public class DijkstraImpl implements Dijkstra {
         // Add the start city and reverse the path
         path.add(start);
         Collections.reverse(path);
-    
-        // Print the reconstructed path
-        System.out.println("Reconstructed path: " + path);
-    
         // Return the distance and path information
         return distances;
     }    
