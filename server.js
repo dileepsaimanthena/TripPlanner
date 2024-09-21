@@ -14,9 +14,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
+// Ensure loadCities returns a promise that resolves with an array of city objects
 function loadCities() {
     const cities = [];
     const csvFilePath = path.join(__dirname, 'public', 'cities.csv');
+    
     return new Promise((resolve, reject) => {
         createReadStream(csvFilePath)
             .pipe(csv())
@@ -24,13 +26,14 @@ function loadCities() {
                 cities.push({ name: row.name });
             })
             .on('end', () => {
-                resolve(cities);
+                resolve(cities);  // Resolve with the array of cities
             })
             .on('error', (err) => {
-                reject(err);
+                reject(err);  // Reject the promise on error
             });
     });
 }
+
 app.get('/', async (req, res) => {
     try {
         const cities = await loadCities();
