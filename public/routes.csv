@@ -1,21 +1,22 @@
 origin,destination,cost,time,transportType
-Boston,New York,150,230,Train
-Boston,Providence,50,90,Bus
-New York,Philadelphia,100,150,Train
-Philadelphia,Washington,80,120,Bus
-Washington,New York,120,180,Plane
-Chicago,New York,300,420,Plane
-Chicago,Boston,350,480,Plane
-San Francisco,Los Angeles,200,60,Train
-Los Angeles,Houston,400,240,Plane
-Houston,Miami,350,300,Plane
-Miami,Atlanta,150,180,Bus
-Atlanta,Dallas,250,210,Train
-Denver,Dallas,220,180,Train
-Seattle,San Francisco,280,300,Bus
-Las Vegas,Los Angeles,100,150,Bus
-Seattle,Las Vegas,250,330,Plane
-Boston,Chicago,400,480,Plane
-New York,Chicago,350,450,Plane
-San Francisco,Denver,320,360,Plane
-Denver,Seattle,300,400,Bus
+Mumbai,Delhi,1500,230,Train
+Mumbai,Bengaluru,500,90,Bus
+Delhi,Kolkata,1000,150,Train
+Kolkata,Hyderabad,800,120,Bus
+Hyderabad,Delhi,1200,180,Plane
+Bengaluru,Delhi,3000,420,Plane
+Bengaluru,Mumbai,2500,480,Plane
+Chennai,Bengaluru,200,60,Train
+Pune,Mumbai,400,240,Plane
+Mumbai,Ahmedabad,350,300,Plane
+Ahmedabad,Jaipur,150,180,Bus
+Jaipur,Lucknow,250,210,Train
+Visakhapatnam,Hyderabad,220,180,Train
+Nagpur,Mumbai,280,300,Bus
+Cochin,Chennai,250,330,Plane
+Chandigarh,Delhi,100,150,Bus
+Bengaluru,Kolkata,4000,480,Plane
+Delhi,Bengaluru,3500,450,Plane
+Chennai,Delhi,3200,360,Plane
+Hyderabad,Cochin,300,400,Bus
+Surat,Mumbai,100,150,Bus
