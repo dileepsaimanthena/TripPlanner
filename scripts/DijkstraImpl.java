@@ -67,10 +67,6 @@ public class DijkstraImpl implements Dijkstra {
         // Add the start city and reverse the path to get the correct order
         path.add(start);
         Collections.reverse(path);
-
-        // Debug print to check the path
-        System.out.println("Reconstructed path: " + path);
-
         return path;
     }
 }
