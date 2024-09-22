@@ -47,7 +47,7 @@ public class TripPlannerController {
                 if (route.getDestination().equals(next)) {
                     // If the priority is 'fast', calculate time; if 'cheap', calculate cost
                     if (priority.equals("fast")) {
-                        total += route.getTime();  // Add time for the fastest route
+                        total += route.getCost();  // Add time for the fastest route
                     } else if (priority.equals("cheap")) {
                         total += route.getCost();  // Add cost for the cheapest route
                     }
@@ -72,7 +72,7 @@ public class TripPlannerController {
         }
 
         // Add the total cost or time
-        routeString.append(" cost/time: ").append(totalCostOrTime);
+        routeString.append(" cost: ").append(totalCostOrTime);
 
         return routeType + ": " + routeString.toString();
     }
