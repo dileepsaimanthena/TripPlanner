@@ -1,7 +1,7 @@
 package scripts;
 import java.util.Comparator;
-import java.util.Map;
+import java.util.List;
 
 public interface Dijkstra {
-    Map<City, Double> findShortestPath(Graph graph, City start, City destination, Comparator<Route> comparator);
+    List<City> findShortestPath(Graph graph, City start, City destination, Comparator<Route> comparator);
 }
