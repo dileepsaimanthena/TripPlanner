@@ -33,7 +33,6 @@
                         <option value="<%= city.name %>"><%= city.name %></option>
                     <% }); %>
                 </select>
-
                 <label for="dst">Select Destination:</label>
                 <select name="dst" id="dst">
                     <% cities.forEach(function(city) { %>
@@ -53,7 +52,7 @@
 
             <% if (path) { %>
                 <div class="route-result">
-                    <h3>Calculated Route:</h3>
+                    <h3>Calculated Route:</h3>                    
                     <p><%= path %></p>
                 </div>
             <% } %>

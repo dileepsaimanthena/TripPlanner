@@ -6,4 +6,5 @@ public interface Graph {
     void addRoute(Route route);
     List<Route> getRoutesFromCity(City city);
     List<City> getCities();  // Needed to fetch all cities for searching
+    void printGraph();
 }

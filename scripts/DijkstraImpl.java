@@ -10,10 +10,8 @@ public class DijkstraImpl implements Dijkstra {
         PriorityQueue<City> queue = new PriorityQueue<>(Comparator.comparingDouble(distances::get));
         Map<City, City> prev = new HashMap<>();
         Set<City> visited = new HashSet<>();
-
         distances.put(start, 0.0);
         queue.add(start);
-
         while (!queue.isEmpty()) {
             City current = queue.poll();
 
@@ -64,9 +62,9 @@ public class DijkstraImpl implements Dijkstra {
             at = prev.get(at);
         }
 
-        // Add the start city and reverse the path to get the correct order
         path.add(start);
         Collections.reverse(path);
+
         return path;
     }
 }

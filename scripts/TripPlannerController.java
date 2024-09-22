@@ -14,14 +14,16 @@ public class TripPlannerController {
         if (priority.equals("fast")) {
             Dijkstra dijkstra = new DijkstraImpl();
             List<City> fastestPath = dijkstra.findShortestPath(graph, start, destination, Comparator.comparingDouble(Route::getTime));
-            double totalTime = calculateTotalCostOrTime(fastestPath, "fast");  // Calculate total time
-            return formatRoute(fastestPath, totalTime, "Fastest Route");
+            double totalTime = calculateTotalTime(fastestPath);
+            double totalCost = calculateTotalCost(fastestPath);
+            return formatRoute(fastestPath, totalTime, totalCost, "Fastest Route");
 
         } else if (priority.equals("cheap")) {
             Dijkstra dijkstra = new DijkstraImpl();
             List<City> cheapestPath = dijkstra.findShortestPath(graph, start, destination, Comparator.comparingDouble(Route::getCost));
-            double totalCost = calculateTotalCostOrTime(cheapestPath, "cheap");  // Calculate total cost
-            return formatRoute(cheapestPath, totalCost, "Cheapest Route");
+            double totalTime = calculateTotalTime(cheapestPath);
+            double totalCost = calculateTotalCost(cheapestPath);
+            return formatRoute(cheapestPath, totalTime, totalCost, "Cheapest Route");
 
         } else {
             BFS bfs = new BFSImpl();
@@ -29,50 +31,51 @@ public class TripPlannerController {
             if (directRoute.isEmpty()) {
                 return "No direct route found from " + start.getName() + " to " + destination.getName();
             }
-            return formatRoute(directRoute, 0, "Direct Route");  // Direct route doesn't need cost
+            double totalTime = calculateTotalTime(directRoute);
+            double totalCost = calculateTotalCost(directRoute);
+            return formatRoute(directRoute, totalTime, totalCost, "Direct Route");
         }
     }
 
-    // Helper method to calculate the total cost or time
-    private double calculateTotalCostOrTime(List<City> path, String priority) {
-        double total = 0.0;
-
-        // Loop through each pair of cities in the path
+    // Helper method to calculate the total cost
+    private double calculateTotalCost(List<City> path) {
+        double totalCost = 0.0;
         for (int i = 0; i < path.size() - 1; i++) {
             City current = path.get(i);
             City next = path.get(i + 1);
-
-            // Find the route between current and next city
             for (Route route : graph.getRoutesFromCity(current)) {
                 if (route.getDestination().equals(next)) {
-                    // If the priority is 'fast', calculate time; if 'cheap', calculate cost
-                    if (priority.equals("fast")) {
-                        total += route.getCost();  // Add time for the fastest route
-                    } else if (priority.equals("cheap")) {
-                        total += route.getCost();  // Add cost for the cheapest route
-                    }
+                    totalCost += route.getCost();
                     break;
                 }
             }
         }
-
-        return total;  // Return the total cost or time for the entire path
+        return totalCost;
+    }
+    private double calculateTotalTime(List<City> path) {
+        double totalTime = 0.0;
+        for (int i = 0; i < path.size() - 1; i++) {
+            City current = path.get(i);
+            City next = path.get(i + 1);
+            for (Route route : graph.getRoutesFromCity(current)) {
+                if (route.getDestination().equals(next)) {
+                    totalTime += route.getTime();
+                    break;
+                }
+            }
+        }
+        return totalTime;
     }
 
-    // Helper method to format the route string
-    private String formatRoute(List<City> path, double totalCostOrTime, String routeType) {
+    private String formatRoute(List<City> path, double totalTime, double totalCost, String routeType) {
         StringBuilder routeString = new StringBuilder();
-
-        // Build the route string like "A -> B -> C"
         for (int i = 0; i < path.size(); i++) {
             routeString.append(path.get(i).getName());
             if (i < path.size() - 1) {
                 routeString.append(" -> ");
             }
         }
-
-        // Add the total cost or time
-        routeString.append(" cost: ").append(totalCostOrTime);
+        routeString.append(" | Total Cost: ₹").append(totalCost).append(", Total Time: ").append(totalTime).append(" minutes");
 
         return routeType + ": " + routeString.toString();
     }

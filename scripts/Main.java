@@ -11,7 +11,7 @@ public class Main {
             System.out.println("Error loading data: " + e.getMessage());
             return;
         }
-
+        graph.printGraph();
         TripPlannerController controller = new TripPlannerController(graph);
 
         String startCityName;
