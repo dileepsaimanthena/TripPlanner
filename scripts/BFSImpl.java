@@ -26,12 +26,14 @@ public class BFSImpl implements BFS {
             }
         }
 
+        // Reconstruct the path from start to destination
         List<City> path = new ArrayList<>();
         for (City at = destination; at != null; at = prev.get(at)) {
             path.add(at);
         }
         Collections.reverse(path);
-        return path.size() > 1 ? path : null;
+
+        // If the path is invalid (meaning there's no route), return an empty list
+        return path.size() > 1 ? path : Collections.emptyList();
     }
 }
-
