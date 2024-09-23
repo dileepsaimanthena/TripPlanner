@@ -31,4 +31,3 @@ public class City {
         return name;
     }
 }
-

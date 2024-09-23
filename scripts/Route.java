@@ -6,7 +6,6 @@ public class Route {
     private double cost;
     private double time;
     private String transportType;
-
     public Route(City source, City destination, double cost, double time, String transportType) {
         this.source = source;
         this.destination = destination;
@@ -32,12 +31,6 @@ public class Route {
     }
 
     public String getTransportType() {
-        return transportType;
-    }
-
-    @Override
-    public String toString() {
-        return source + " -> " + destination + " [" + transportType + ", Time: " + time + ", Cost: " + cost + "]";
+        return transportType;  // Getter for transport type
     }
 }
-
