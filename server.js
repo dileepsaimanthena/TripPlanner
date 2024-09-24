@@ -73,6 +73,14 @@ app.post('/', async (req, res) => {
         res.status(500).send('Error processing the request');
     }
 });
+app.get('/documentation', (req, res) => {
+    res.render('documentation');
+});
+
+app.get('/contact', (req, res) => {
+    res.render('contact');
+});
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
