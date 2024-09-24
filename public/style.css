@@ -165,8 +165,8 @@ footer p {
 }
 /* Route Result Styles */
 .route-result {
-    background-color: #e3f2fd; /* Light blue background */
-    border-left: 5px solid #fca103; /* Accent left border */
+    background-color: #ffe5b7;
+    border-left: 5px solid #ec9d14;
     padding: 20px;
     margin-top: 20px;
     border-radius: 10px;
